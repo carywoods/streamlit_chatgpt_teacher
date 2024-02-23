@@ -9,7 +9,6 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
 
-
 # Load your data
 df = pd.read_csv('ChatGPT_Teacher_sheet1.csv')
 
@@ -49,7 +48,7 @@ elif plot_type == 'Correlation Heatmap':
 
 
 # Load your dataset
-df1 = pd.read_csv('ChatGPT_Teacher_sheet1.csv')
+df1 = df
 
 # Assuming 'target' is the name of your target variable
 # and the rest of the columns are features
