@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load your data
-df = pd.read_csv('https://drive.google.com/file/d/1ArWkzHm7cY-S7TNC_cvnbCXOVsVtFv-M/view?usp=sharing')
+df = pd.read_csv('ChatGPT_Teacher_sheet1.csv')
 
 # Title of your app
 st.title('EDA of Dataset')
