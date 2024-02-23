@@ -17,5 +17,5 @@ df = pd.read_csv('ChatGPT_Teacher_sheet1.csv')
 st.title('EDA of Dataset')
 
 # Show the raw data
-if st.checkbox('Show raw data'):
-    st.write(df)
+#if st.checkbox('Show raw data'):
+#    st.write(df)
