@@ -8,3 +8,13 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
+
+# Load your data
+df = pd.read_csv('ChatGPT_Teacher_sheet1.csv')
+
+# Title of your app
+st.title('EDA of Dataset')
+
+# Show the raw data
+if st.checkbox('Show raw data'):
+    st.write(df)
