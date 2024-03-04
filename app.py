@@ -62,7 +62,7 @@ st.subheader('Sentiment vs Likes Category Distribution')
 
 # Creating a pivot table for the counts of likes categories within each sentiment
 pivot_df = filtered_df.groupby(['Sentiment', 'Likes_Category']).size().reset_index(name='Count')
-pivot_df = pivot_df.pivot("Sentiment", "Likes_Category", "Count")
+pivot_df = pivot_df.pivot_table(index='Sentiment', columns='Likes_Category', values='Count', fill_value=0)
 
 # Plotting
 fig, ax = plt.subplots()
