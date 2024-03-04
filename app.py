@@ -1,9 +1,11 @@
 import streamlit as st
 import pandas as pd
 from textblob import TextBlob
+import matplotlib.pyplot as plt
+import seaborn as sns
+import nltk
 
 # Ensure TextBlob corpora is downloaded
-import nltk
 nltk.download('punkt')
 
 # Function to calculate sentiment
@@ -29,7 +31,6 @@ def categorize_likes(likes):
 # Load the dataset
 @st.cache
 def load_data():
-    # Adjust the path if your dataset is located elsewhere
     df = pd.read_csv('chat_teacher_fb.csv')
     df['Sentiment'] = df['description'].apply(calculate_sentiment)
     df['Likes_Category'] = df['likes'].apply(categorize_likes)
@@ -55,5 +56,19 @@ if sentiment_filter != 'All':
     filtered_df = filtered_df[filtered_df['Sentiment'] == sentiment_filter]
 if likes_filter != 'All':
     filtered_df = filtered_df[filtered_df['Likes_Category'] == likes_filter]
+
+# Sentiment distribution plot
+st.subheader('Sentiment Distribution')
+sentiment_count = filtered_df['Sentiment'].value_counts()
+fig, ax = plt.subplots()
+sns.barplot(x=sentiment_count.index, y=sentiment_count.values, ax=ax)
+st.pyplot(fig)
+
+# Likes category distribution plot
+st.subheader('Likes Category Distribution')
+likes_count = filtered_df['Likes_Category'].value_counts()
+fig, ax = plt.subplots()
+sns.barplot(x=likes_count.index, y=likes_count.values, ax=ax)
+st.pyplot(fig)
 
 st.write(filtered_df)
