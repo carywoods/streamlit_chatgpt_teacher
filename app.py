@@ -1,30 +1,36 @@
-import subprocess
-cmd = ['python3','-m','textblob.download_corpora']
-subprocess.run(cmd)
-print("Working")
-
 import streamlit as st
 import pandas as pd
 from textblob import TextBlob
 
+# Ensure TextBlob corpora is downloaded
+import nltk
+nltk.download('punkt')
+
 # Function to calculate sentiment
 def calculate_sentiment(text):
-    sentiment = TextBlob(text).sentiment.polarity
-    return 'Positive' if sentiment > 0 else 'Negative' if sentiment < 0 else 'Neutral'
+    try:
+        sentiment = TextBlob(text).sentiment.polarity
+        return 'Positive' if sentiment > 0 else 'Negative' if sentiment < 0 else 'Neutral'
+    except:
+        return 'Neutral'
 
 # Function to categorize likes
 def categorize_likes(likes):
-    if likes <= 100:
-        return 'Low'
-    elif likes <= 500:
-        return 'Medium'
-    else:
-        return 'High'
+    try:
+        if likes <= 100:
+            return 'Low'
+        elif likes <= 500:
+            return 'Medium'
+        else:
+            return 'High'
+    except:
+        return 'Unknown'
 
 # Load the dataset
 @st.cache
 def load_data():
-    df = pd.read_csv('/mnt/data/chat_teacher_fb.csv')
+    # Adjust the path if your dataset is located elsewhere
+    df = pd.read_csv('chat_teacher_fb.csv')
     df['Sentiment'] = df['description'].apply(calculate_sentiment)
     df['Likes_Category'] = df['likes'].apply(categorize_likes)
     return df
