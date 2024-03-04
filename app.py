@@ -29,4 +29,4 @@ pivot_df.plot(kind='bar', stacked=False, figsize=(10, 7))
 
 plt.ylabel('Count')
 plt.title('Distribution of Likes Categories within Each Sentiment')
-st.pyplot(plt
+st.pyplot(plt)
